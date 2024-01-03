@@ -1,0 +1,61 @@
+<h3>Select Table</h3>
+
+  <select class="form-control" (change)="onTableSelected($event)">
+    <option [value]="null" disabled selected>Select Table</option>
+    <option *ngFor="let table of Tables" [value]="table">{{table}}</option>
+  </select>
+
+  <button class="btn btn-primary mt-3" [disabled]="btnsDisabled" (click)="showTable=true;">Query Table</button>
+  <button type="button" class="btn btn-secondary mt-3" style="margin-left: 3px;" [disabled]="btnsDisabled">Select Data</button>
+<div class="Query">
+  <table *ngIf="showTable">
+    <thead>
+      <tr>
+        <th>
+          Add/Remove
+        </th>
+        <th>
+          And/Or
+        </th>
+        <th>
+          Column
+        </th>
+        <th>
+          Operator
+        </th>
+        <th>
+          Value
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <a href=""><i class="fa-solid fa-plus" style="color: #0ecc00;"></i></a>
+          <a href=""><i class="fa-solid fa-x" style="color: #ff0000;"></i></a>
+        </td>
+        <td>
+          <select class="form-control">
+            <option selected value="And">And</option>
+            <option value="Or">Or</option>
+          </select>
+        </td>
+        <td>
+          <select class="form-control">
+            <option [value]="null" disabled selected>Select Column</option>
+            <option *ngFor="let column of Columns" [value]="column">{{column}}</option>
+          </select>
+        </td>
+        <td>
+          <select class="form-control">
+            <option selected value="=">=</option>
+            <option value="!=">!=</option>
+          </select>
+        </td>
+        <td>
+          <input class="form-control" type="text">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

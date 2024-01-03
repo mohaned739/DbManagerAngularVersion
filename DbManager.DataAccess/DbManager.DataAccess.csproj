@@ -15,4 +15,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DbManager.Models\DbManager.Models.csproj" />
+  </ItemGroup>
+
 </Project>

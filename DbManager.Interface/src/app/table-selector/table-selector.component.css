@@ -1,0 +1,10 @@
+.fa-solid{
+  padding-left: 25%;
+}
+
+table{
+  display: inline;
+  padding-left: 2%;
+  border-collapse: separate;
+  border-spacing: 10px;
+}
