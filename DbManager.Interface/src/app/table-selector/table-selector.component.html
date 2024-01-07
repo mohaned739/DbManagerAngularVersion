@@ -1,12 +1,12 @@
 <h3>Select Table</h3>
 
-  <select class="form-control" (change)="onTableSelected($event)">
+  <select id="tableNames" class="form-control" (change)="onTableSelected($event)">
     <option [value]="null" disabled selected>Select Table</option>
     <option *ngFor="let table of Tables" [value]="table">{{table}}</option>
   </select>
 
   <button class="btn btn-primary mt-3" [disabled]="btnsDisabled" (click)="showTable=true;">Query Table</button>
-  <button type="button" class="btn btn-secondary mt-3" style="margin-left: 3px;" [disabled]="btnsDisabled">Select Data</button>
+  <button type="button" class="btn btn-secondary mt-3" style="margin-left: 3px;" [disabled]="btnsDisabled" (click)="GetData()">Select Data</button>
 <div class="Query">
   <table *ngIf="showTable">
     <thead>
@@ -58,4 +58,22 @@
       </tr>
     </tbody>
   </table>
+</div>
+
+<div class="col-md-12 mb-3" style="margin-top: 10px;">
+  <ngx-datatable
+  *ngIf="isDataLoaded"
+    class="material container striped"
+    [rows]="rows"
+    [columnMode]="'force'"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [rowHeight]="'auto'">
+      <ngx-datatable-column *ngFor="let column of Columns" [name]="column" [prop]="column"  [flexGrow]="2">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            {{row[column]}}
+        </ng-template>
+    </ngx-datatable-column>
+    <!-- <ngx-datatable-column [name]="column" [prop]="Column"></ngx-datatable-column> -->
+  </ngx-datatable>
 </div>

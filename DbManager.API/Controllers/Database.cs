@@ -1,5 +1,7 @@
-﻿using DbManager.Models;
+﻿using DbManager.DataAccess;
+using DbManager.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 namespace DbManager.API.Controllers
@@ -8,6 +10,12 @@ namespace DbManager.API.Controllers
     [ApiController]
     public class Database : ControllerBase
     {
+        private readonly ApplicationDbContext _context;
+
+        public Database(ApplicationDbContext context)
+        {
+            _context = context;
+        }
 
         [HttpGet("[Action]")]
         public List<string> GetDatabases()
@@ -46,9 +54,21 @@ namespace DbManager.API.Controllers
                 .FirstOrDefault(t => t.Namespace == targetNamespace && t.IsClass && t.Name == tableName);
 
             var properties = classAssembly.GetProperties()
-                .Select(p=> p.Name)
+                .Select(p => p.Name)
                 .ToList();
             return properties;
+        }
+
+        [HttpGet("[Action]")]
+        public List<Account> GetAccountData()
+        {
+            return _context.Accounts.ToList();
+        }
+
+        [HttpGet("[Action]")]
+        public List<User> GetUserData()
+        {
+            return _context.Users.ToList();
         }
     }
 }

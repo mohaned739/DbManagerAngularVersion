@@ -36,4 +36,19 @@ export class TablesInfoService {
         );
     });
   }
+
+  GetData(tableName: string): Promise<any | undefined> {
+    return new Promise((resolve, reject) => {
+      this.client.get<string[]>('https://localhost:7093/api/Database/Get'+tableName+'Data')
+        .subscribe(
+          response => {
+            resolve(response);
+          },
+          error => {
+            console.error(error.message);
+            reject(error);
+          }
+        );
+    });
+  }
 }
